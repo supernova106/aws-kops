@@ -1,0 +1,48 @@
+#!make
+include .env
+export $(shell sed 's/=.*//' .env)
+
+help:
+	@echo "build - build Kubernetes cluster"
+terraform:
+	kops create cluster \
+	--api-loadbalancer-type internal \
+	--associate-public-ip=false \
+	--cloud=aws \
+	--kubernetes-version $(KUBERNETES_VERSION) \
+	--cloud-labels "KubernetesCluster=\"true\",Provisioner=\"kops\",Team=\"usc\",Role=\"mgmt\"" \
+	--zones=$(ZONES) \
+	--master-zones=$(ZONES) \
+	--node-count=3 \
+	--node-size=$(NODE_SIZE) \
+	--node-volume-size 100 \
+	--master-size=$(MASTER_SIZE) \
+	--master-volume-size 100 \
+	--image $(IMAGE) \
+	--state $(KOPS_STATE_STORE) \
+	--networking weave \
+	--channel stable \
+	--name=$(KOPS_DOMAIN) \
+	--vpc=$(VPC_ID)  \
+	--admin-access $(ADMIN_ACCESS) \
+	--dns private \
+	--dns-zone=$(DNS_ZONE) \
+	--network-cidr=$(NETWORK_CIDR) \
+	--topology private \
+	--encrypt-etcd-storage \
+	--ssh-access $(SSH_ACCESS) \
+	--ssh-public-key=$(SSH_PUBLIC_KEY) \
+	--subnets $(SUBNETS) \
+	--utility-subnets $(UTILITY_SUBNETS) \
+	--authorization=AlwaysAllow \
+	--target terraform
+edit:
+	kops edit cluster $(KOPS_DOMAIN)
+dryrun:
+	kops update cluster --name=$(KOPS_DOMAIN) --state=$(KOPS_STATE_STORE)
+update:
+	kops update cluster --name=$(KOPS_DOMAIN) --state=$(KOPS_STATE_STORE) --yes
+validate:
+	kops validate cluster --name=$(KOPS_DOMAIN)
+delete:
+	kops delete cluster $(KOPS_DOMAIN) --yes
