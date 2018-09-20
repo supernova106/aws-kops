@@ -49,9 +49,24 @@ fi
 sudo mv /tmp/jx /usr/local/bin
 
 # Install helm
-cd /tmp && curl -L https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-amd64.tar.gz | tar xzv
+cd /tmp && curl -L https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-amd64.tar.gz | tar -zxfv
 sudo chmod +x /tmp/linux-amd64/helm
 if [ -f "/usr/local/bin/helm" ]; then
     sudo rm /usr/local/bin/helm
 fi
 sudo mv /tmp/linux-amd64/helm /usr/local/bin
+
+# Install kubectx, kubens
+curl -L https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx > /tmp/kubectx
+sudo chmod +x /tmp/kubectx
+if [ -f "/usr/local/bin/kubectx" ]; then
+    sudo rm /usr/local/bin/kubectx
+fi
+sudo mv /tmp/kubectx /usr/local/bin/
+
+curl -L https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens > /tmp/kubens
+sudo chmod +x /tmp/kubens
+if [ -f "/usr/local/bin/kubens" ]; then
+    sudo rm /usr/local/bin/kubens
+fi
+sudo mv /tmp/kubens /usr/local/bin/
