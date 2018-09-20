@@ -3,7 +3,7 @@ To make your life easier
 
 ## Deploy Kubernetes
 
-- For prod: `cp env.qa .env`
+- For qa: `cp env.qa .env`, `cp Makefile.qa Makefile`
 - Generate: terraform state file
 
 ```

@@ -1,8 +1,8 @@
 #!/bin/bash -ex
 DOCKER_VERSION=${1:-"17.12.1~ce-0~ubuntu"}
-KOPS_VERSION="1.9.1"
-JX_VERSION="1.0.14"
-HELM_VERSION="2.9.1"
+KOPS_VERSION="1.10.0"
+JX_VERSION="1.3.290"
+HELM_VERSION="2.11.0-rc.4"
 
 sudo apt-get update && sudo apt-get install -y \
     python-pip \
