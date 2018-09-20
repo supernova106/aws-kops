@@ -41,7 +41,7 @@ sudo apt-get update && \
     docker-ce=${DOCKER_VERSION}
 
 # Install Jx
-cd /tmp && wget -O jx https://github.com/jenkins-x/jx-release-version/releases/download/v${JX_VERSION}/jx-release-version-linux
+cd /tmp && wget -O jx https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-amd64.tar.gz
 chmod +x /tmp/jx
 if [ -f "/usr/local/bin/jx" ]; then
     sudo rm /usr/local/bin/jx
