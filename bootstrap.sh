@@ -11,7 +11,7 @@ sudo apt-get update && sudo apt-get install -y \
 # Install kops
 sudo pip install --upgrade awscli boto boto3
 cd /tmp && wget -O kops https://github.com/kubernetes/kops/releases/download/${KOPS_VERSION}/kops-linux-amd64
-chmod +x /tmp/kops
+sudo chmod +x /tmp/kops
 if [ -f "/usr/local/bin/kops" ]; then
     sudo rm /usr/local/bin/kops
 fi
@@ -19,7 +19,7 @@ sudo mv /tmp/kops /usr/local/bin/
 
 # Install kubectl
 cd /tmp && wget -O kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-chmod +x /tmp/kubectl
+sudo chmod +x /tmp/kubectl
 if [ -f "/usr/local/bin/kubectl" ]; then
     sudo rm /usr/local/bin/kubectl
 fi
@@ -42,7 +42,7 @@ sudo apt-get update && \
 
 # Install Jx
 cd /tmp && wget -O jx https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-amd64.tar.gz
-chmod +x /tmp/jx
+sudo chmod +x /tmp/jx
 if [ -f "/usr/local/bin/jx" ]; then
     sudo rm /usr/local/bin/jx
 fi
@@ -50,7 +50,7 @@ sudo mv /tmp/jx /usr/local/bin
 
 # Install helm
 cd /tmp && curl -L https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-amd64.tar.gz | tar xzv
-chmod +x /tmp/linux-amd64/helm
+sudo chmod +x /tmp/linux-amd64/helm
 if [ -f "/usr/local/bin/helm" ]; then
     sudo rm /usr/local/bin/helm
 fi
